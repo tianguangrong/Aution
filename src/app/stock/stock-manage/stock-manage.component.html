@@ -1,0 +1,45 @@
+<div class="white-box">
+    <button type="button" class="btn btn-success" (click)="onCreat()">
+        <span class="fa fa-plus-square"></span>
+        创建
+    </button>
+    <div class="box-tools">
+        <div class="input-group input-group-sm" style="width: 150px;">
+            <input type="text" [formControl]="searchStocks" name="table_search" class="form-control pull-right" placeholder="Search">
+    
+            <div class="input-group-btn">
+            <button type="submit" class="btn btn-default"><i class="fa fa-search"></i></button>
+            </div>
+        </div>
+    </div>
+  <table class="tablesaw table-striped table-hover table-bordered table" data-tablesaw-mode="columntoggle">
+      <thead>
+          <tr>
+            <th scope="col" data-tablesaw-sortable-col data-tablesaw-priority="4">#</th>
+              <th scope="col" data-tablesaw-sortable-col data-tablesaw-priority="persist">股票名称</th>
+              <th scope="col" data-tablesaw-sortable-col data-tablesaw-sortable-default-col data-tablesaw-priority="3">股票价格</th>
+              <th scope="col" data-tablesaw-sortable-col data-tablesaw-priority="2">股票评级</th>
+              <th scope="col" data-tablesaw-sortable-col data-tablesaw-priority="2">股票描述</th>
+              <th scope="col" data-tablesaw-sortable-col data-tablesaw-priority="2">股票种类</th>
+              <th scope="col" data-tablesaw-sortable-col data-tablesaw-priority="1">
+                  <abbr title="Rotten Tomato Rating">操作</abbr>
+              </th>
+          </tr>
+      </thead>
+      <tbody>
+          <tr *ngFor="let stock of stocks | stockSearch:'name':keyWord ;let i=index;">
+              <td class="title"><a href="javascript:void(0)">{{i+1}}</a></td>
+              <td>{{stock.name}}</td>
+              <td>{{stock.price}}</td>
+              <td><app-stars [rating]="stock.rating"></app-stars></td>
+              <td>{{stock.desc}}</td>
+              <td>{{stock.category}}</td>
+              <td class="flex-container">
+                <button type="button" class="btn btn-info btn-outline btn-circle btn-lg m-r-5"><span class="icon-trash" (click)="onUpdate(stock)">修改</span></button>
+                <button type="button" class="btn btn-info btn-outline btn-circle btn-lg m-r-5"><span class="ti-pencil-alt">删除</span></button>
+              </td>
+          </tr>
+          
+      </tbody>
+  </table>
+</div>
